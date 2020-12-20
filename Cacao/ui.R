@@ -8,14 +8,63 @@
 #
 
 library(shiny)
-library(DT)
+library(shinydashboard)
+library(ggvis)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
-
-    # Application title
-    titlePanel("Tabla de actores que intervienen en el cacao"),
-
-    # Create a new row for the table.
-    DT::dataTableOutput("table")
+shinyUI(dashboardPage(
+  dashboardHeader(title = "Propiedades del cacao"),
+  dashboardSidebar(disable = TRUE),
+  dashboardBody(
+    h1("Cuadros estadisticos con ggplot"),
+    fluidRow(
+      box(width = 3,
+        title = "Peso pepa cacao", status = "primary", solidHeader = TRUE,
+        collapsible = TRUE,
+        plotOutput("ggplotpepa")
+      ),
+      box(width = 3,
+        title = "Longitud pepa cacao", status = "primary", solidHeader = TRUE,
+        collapsible = TRUE,
+        plotOutput("ggplotlongitud")
+      ),
+      box(width = 3,
+        title = "Espesor pepa cacao", status = "primary", solidHeader = TRUE,
+        collapsible = TRUE,
+        plotOutput("ggplotespesor")
+      ),
+      box(width = 3,
+        title = "Ancho pepa cacao", status = "primary", solidHeader = TRUE,
+        collapsible = TRUE,
+        plotOutput("ggplotancho")
+      )
+    ),
+    h1("Cuadros estadisticos con ggviz"),
+    fluidRow(
+      box(width = 3,
+          title = "Peso pepa cacao", status = "primary", solidHeader = TRUE,
+          collapsible = TRUE,
+          ggvisOutput("ggvizpepa"),
+          ggvisOutput("ggvizpepabp")
+      ),
+      box(width = 3,
+          title = "Longitud pepa cacao", status = "primary", solidHeader = TRUE,
+          collapsible = TRUE,
+          ggvisOutput("ggpvizlongitud"),
+          ggvisOutput("ggpvizlongitudbp")
+      ),
+      box(width = 3,
+          title = "Espesor pepa cacao", status = "primary", solidHeader = TRUE,
+          collapsible = TRUE,
+          ggvisOutput("ggvizespesor"),
+          ggvisOutput("ggvizespesorbp")
+      ),
+      box(width = 3,
+          title = "Ancho pepa cacao", status = "primary", solidHeader = TRUE,
+          collapsible = TRUE,
+          ggvisOutput("ggvizancho"),
+          ggvisOutput("ggvizanchobp")
+      )
+    )
+  )
 ))
